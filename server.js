@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/home", async (req, res) => {
   const shortUrls = await shortUrlModel.find();
-  return res.render("index", { shortUrls });
+  return res.render("index.ejs", { shortUrls });
 });
 
 app.post("/shortUrls", async (req, res) => {
