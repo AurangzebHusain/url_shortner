@@ -16,9 +16,15 @@ mongoose.connect(
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/home", async (req, res) => {
+app.get("/", async (req, res) => {
   const shortUrls = await shortUrlModel.find();
-  return res.render("index.ejs", { shortUrls });
+  return res.render("index.ejs", { shortUrls }, (err, html) => {
+    if (err) {
+      res.redirect("/error");
+    } else {
+      res.send(html);
+    }
+  });
 });
 
 app.post("/shortUrls", async (req, res) => {
